@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Docker安装Elasticsearch | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Docker安装ElasticsearchElasticsearch默认安装后设置的内存是2GB，如果服务器内存不足，就会启动失败。 解决方案：启动时设置内存大小，下面的例子中内存大小设置为256m。 12345678docker run -p 9200:9200 -p 9300:9300 --name elasticsearch \-e &quot;discovery.type&#x3D;sin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker安装Elasticsearch">
+<meta property="og:url" content="https://zhaohui-zh.github.io/2020/02/07/Docker%E5%AE%89%E8%A3%85Elasticsearch/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Docker安装ElasticsearchElasticsearch默认安装后设置的内存是2GB，如果服务器内存不足，就会启动失败。 解决方案：启动时设置内存大小，下面的例子中内存大小设置为256m。 12345678docker run -p 9200:9200 -p 9300:9300 --name elasticsearch \-e &quot;discovery.type&#x3D;sin">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-07T10:41:16.432Z">
+<meta property="article:modified_time" content="2019-10-02T07:38:17.903Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhaohui-zh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Docker安装Elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/07/Docker%E5%AE%89%E8%A3%85Elasticsearch/" class="article-date">
+  <time datetime="2020-02-07T10:41:16.432Z" itemprop="datePublished">2020-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Docker安装Elasticsearch
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Docker安装Elasticsearch"><a href="#Docker安装Elasticsearch" class="headerlink" title="Docker安装Elasticsearch"></a>Docker安装Elasticsearch</h1><p>Elasticsearch默认安装后设置的内存是2GB，如果服务器内存不足，就会启动失败。</p>
+<p>解决方案：启动时设置内存大小，下面的例子中内存大小设置为256m。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9200:9200 -p 9300:9300 --name elasticsearch \</span><br><span class="line">-e &quot;discovery.type&#x3D;single-node&quot; \</span><br><span class="line">-e &quot;cluster.name&#x3D;elasticsearch&quot; \</span><br><span class="line">-e ES_JAVA_OPTS&#x3D;&quot;-Xms256m -Xmx256m&quot; \</span><br><span class="line">-v &#x2F;root&#x2F;mydata&#x2F;elasticsearch&#x2F;plugins:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;plugins \</span><br><span class="line">-v &#x2F;root&#x2F;mydata&#x2F;elasticsearch&#x2F;data:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;data \</span><br><span class="line">-v &#x2F;root&#x2F;mydata&#x2F;elasticsearch&#x2F;logs:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;logs \</span><br><span class="line">-d elasticsearch:6.4.0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zhaohui-zh.github.io/2020/02/07/Docker%E5%AE%89%E8%A3%85Elasticsearch/" data-id="ck6c2pdcl0000uwub7h0rh4k3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/07/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/07/Docker%E5%AE%89%E8%A3%85Elasticsearch/">Docker安装Elasticsearch</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/07/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
